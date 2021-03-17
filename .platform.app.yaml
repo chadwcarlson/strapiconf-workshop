@@ -11,7 +11,7 @@ type: nodejs:12
 
 variables:
     env:
-        STRAPI_ALLOW_DEVELOPMENT: false
+        STRAPI_ALLOW_DEV: false
 
 # Use Yarn instead of npm.
 build:
@@ -62,6 +62,7 @@ web:
     #             - full_documentation.json
     commands:
         start: |
+            echo $STRAPI_ALLOW_DEV
             # Production start on `master`, development server otherwise.
             if [ "$PLATFORM_BRANCH" = master ]; then
                 NODE_ENV=production yarn start
