@@ -18,4 +18,4 @@ A quick description of your strapi application
 - add relationship
 - update database.js: This allows us to continue using sqllite locally, but deploy to Postgres
 - add config-reader: `yarn add platformsh-config`
-- GO BACK: ERRORS ON HANDLE_MOUNTS.SH
+- GO BACK: ERRORS ON HANDLE_MOUNTS.SH (need some ignore steps added in here for those gitignored)
