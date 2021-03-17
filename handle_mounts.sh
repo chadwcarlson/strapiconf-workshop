@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This is a simple script for handling committed files and mounts on Platform.sh. Some application require write access to certain locations
-# at runtime, and must be defined with mounts (https://docs.platform.sh/configuration/app/storage.html#mounts). One consequence of defining a 
+# at runtime, that must be defined with mounts (https://docs.platform.sh/configuration/app/storage.html#mounts). One consequence of defining a 
 # location as a mount, however, is that when the location is mounted during the deploy hook, any files that may have been committed or modified
 # during the build hook there will be overwritten by whatever exists in persistent storage for that environment. 
 # 
@@ -39,6 +39,8 @@ stage_files() {
         mkdir -p $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp
         # Move its files.
         mv $PLATFORM_APP_DIR/$MOUNT/* $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp
+    else
+        echo "x No commits to mount. Skipping: $MOUNT"
     fi
 }
 
