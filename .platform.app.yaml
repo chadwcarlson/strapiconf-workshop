@@ -24,7 +24,6 @@ hooks:
     # No services are available but the disk is writeable.
     build: |
         # Move committed files in soon-to-be mounts into temp directory.
-        chmod +x handle_mounts.sh
         ./handle_mounts.sh
 
         # Install dependencies and build Strapi.
@@ -34,9 +33,9 @@ hooks:
     # Code cannot be modified at this point but the database is available.
     # The site is not accepting requests while this script runs so keep it
     # fast.
-    deploy: |
-        # Move committed files from temp directory back into mounts.
-        ./handle_mounts.sh
+    build: !include
+        type: string
+        path: handle_mounts.sh
 
 # The relationships of the application with services or other applications.
 #
