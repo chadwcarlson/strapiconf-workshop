@@ -40,7 +40,7 @@ stage_files() {
         # Move its files.
         mv $PLATFORM_APP_DIR/$MOUNT/* $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp
     else
-        echo "x No commits to mount. Skipping: $MOUNT"
+        echo "x No commits to mount $MOUNT. Skipping."
     fi
 }
 
@@ -68,9 +68,9 @@ run() {
             # Build hook. The $PLATFORM_BRANCH environment variable is not available in build containers.
             if [ -z "${PLATFORM_BRANCH}" ]; then
                 # Create the tmp directory (MOUNT_TMP) on the first pass only. (/app/platformsh-mounts on Platform.sh)
-                if [ -d $PLATFORM_APP_DIR/$MOUNT_TMP ]; then
-                    mkdir $PLATFORM_APP_DIR/$MOUNT_TMP
-                fi 
+                # if [ -d $PLATFORM_APP_DIR/$MOUNT_TMP ]; then
+                #     mkdir $PLATFORM_APP_DIR/$MOUNT_TMP
+                # fi 
                 stage_files $mount
             # Deploy hook.
             else
