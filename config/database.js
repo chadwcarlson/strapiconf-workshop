@@ -17,7 +17,7 @@ let options = {
 if (config.isValidPlatform() && !config.inBuild()) {
   // Platform.sh database configuration. Used post-build only in P.sh environments.
   const credentials = config.credentials(dbRelationship);
-  console.log(`Using Platform.sh configuration with relationship ${dbRelationship}.`);
+  console.log(`> platform.sh: Using Platform.sh configuration with relationship ${dbRelationship}.`);
 
   settings = {
     client: "postgres",
@@ -45,10 +45,10 @@ if (config.isValidPlatform() && !config.inBuild()) {
 } else {
     if (config.isValidPlatform()) {
           // Build hook configuration message.
-          console.log('Using default configuration during Platform.sh build hook until relationships are available.');
+          console.log('> platform.sh: Using default configuration during Platform.sh build hook until relationships are available.');
     } else {
           // Strapi default local configuration.
-          console.log('Not in a Platform.sh Environment. Using default local sqlite configuration.');
+          console.log('> platform.sh: Not in a Platform.sh Environment. Using default local sqlite configuration.');
     }
 }
 
