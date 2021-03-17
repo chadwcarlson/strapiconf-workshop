@@ -33,6 +33,7 @@ clean_mount_defn(){
 #   as a mount to the tmp directory MOUNT_TMP.
 stage_files() {
     MOUNT="$(clean_mount_defn $1)"
+    echo "----> $MOUNT"
     if [ "$(directory_check $PLATFORM_APP_DIR/$MOUNT)" ]; then
         echo "> platform.sh: Staging commits to mount: $MOUNT"
         # Duplicate the mount directory in MOUNT_TMP. 
