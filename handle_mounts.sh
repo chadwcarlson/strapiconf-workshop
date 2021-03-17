@@ -34,6 +34,7 @@ clean_mount_defn(){
 stage_files() {
     MOUNT=`clean_mount_defn $1`
     if [ "$(directory_check $PLATFORM_APP_DIR/$MOUNT)" ]; then
+        echo "> Staging commits to mount: $MOUNT"
         # Duplicate the mount directory in MOUNT_TMP. 
         mkdir -p $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp
         # Move its files.
@@ -48,6 +49,7 @@ restore_files() {
     MOUNT=`clean_mount_defn $1`
     # if [ -d $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp ]; then 
     if [ "$(directory_check $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp)" ]; then
+        echo "> Restoring commits to mount: $MOUNT"
         # Clean up files in mount so it's up to date with what we're moving over. 
         rm -r $PLATFORM_APP_DIR/$MOUNT/*
         # Restore the directory's files.
