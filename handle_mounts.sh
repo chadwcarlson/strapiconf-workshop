@@ -56,35 +56,48 @@ restore_files() {
     done
 
 
-    MOUNT="$(clean_mount_defn $1)"
-    # if [ -d $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp ]; then 
-    if [ "$(directory_check $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp)" ]; then
-        echo "> platform.sh: Restoring committed files to mount $MOUNT"
-        # Clean up files in mount so it's up to date with what we're moving over. 
-        rm -r $PLATFORM_APP_DIR/$MOUNT/*
-        # Restore the directory's files.
-        cp -r $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp/* $PLATFORM_APP_DIR/$MOUNT
-    else
-        echo "x platform.sh: No staged commits for mount $MOUNT. Skipping."
-    fi 
+    # MOUNT="$(clean_mount_defn $1)"
+    # # if [ -d $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp ]; then 
+    # if [ "$(directory_check $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp)" ]; then
+    #     echo "> platform.sh: Restoring committed files to mount $MOUNT"
+    #     # Clean up files in mount so it's up to date with what we're moving over. 
+    #     rm -r $PLATFORM_APP_DIR/$MOUNT/*
+    #     # Restore the directory's files.
+    #     cp -r $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp/* $PLATFORM_APP_DIR/$MOUNT
+    # else
+    #     echo "x platform.sh: No staged commits for mount $MOUNT. Skipping."
+    # fi 
 }
 
 # Main function
 run() {
     # Use PLATFORM_APPLICATION environment variable and jq to find all user-defined mounts.
-    MOUNTS=$(echo $PLATFORM_APPLICATION | base64 --decode | jq '.mounts | keys')
-    for mount in $(echo "${MOUNTS}" | jq -r '.[]'); do 
-        _jq() {
-            # Build hook. The $PLATFORM_BRANCH environment variable is not available in build containers.
-            if [ -z "${PLATFORM_BRANCH}" ]; then
-                stage_files $mount
-            # Deploy hook.
-            else
-                restore_files $mount
-            fi
-        }
-        echo $(_jq)
-    done
+    # MOUNTS=$(echo $PLATFORM_APPLICATION | base64 --decode | jq '.mounts | keys')
+    # for mount in $(echo "${MOUNTS}" | jq -r '.[]'); do 
+    #     _jq() {
+    #         # Build hook. The $PLATFORM_BRANCH environment variable is not available in build containers.
+    #         if [ -z "${PLATFORM_BRANCH}" ]; then
+    #             stage_files $mount
+    #         # Deploy hook.
+    #         else
+    #             restore_files $mount
+    #         fi
+    #     }
+    #     echo $(_jq)
+    # done
+
+    if [ -z "${PLATFORM_BRANCH}" ]; then
+        MOUNTS=$(echo $PLATFORM_APPLICATION | base64 --decode | jq '.mounts | keys')
+            for mount in $(echo "${MOUNTS}" | jq -r '.[]'); do 
+                _jq() {
+                    # Build hook. The $PLATFORM_BRANCH environment variable is not available in build containers.
+                    stage_files $mount
+                }
+                echo $(_jq)
+            done
+    else
+        restore_files
+    fi
 }
 
 run
