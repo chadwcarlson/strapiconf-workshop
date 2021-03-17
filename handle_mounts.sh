@@ -27,7 +27,7 @@ directory_check(){
 clean_mount_defn(){
     MOUNT=$1
     echo "--X--> $1"
-    if [[ ${MOUNT:0:1} == "/" ]] ; then echo "${MOUNT:1}"; else echo $MOUNT; fi
+    if [ ${MOUNT:0:1} == "/" ]; then echo "${MOUNT:1}"; else echo $MOUNT; fi
 }
 
 # During the build hook, this function moves files committed to the same directory as one defined in `.platform.app.yaml`
@@ -50,7 +50,7 @@ stage_files() {
 #   deploy time.
 restore_files() {
     echo "-----> $1"
-    MOUNT=`clean_mount_defn $1`
+    MOUNT="clean_mount_defn $1"
     # if [ -d $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp ]; then 
     if [ "$(directory_check $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp)" ]; then
         echo "> platform.sh: Restoring commits to mount: $MOUNT"
