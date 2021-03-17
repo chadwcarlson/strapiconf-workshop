@@ -48,6 +48,7 @@ stage_files() {
 #   away from the tmp directory MOUNT_TMP back into their original location, which is now a mount with write-access at 
 #   deploy time.
 restore_files() {
+    echo "-----> $1"
     MOUNT=`clean_mount_defn $1`
     # if [ -d $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp ]; then 
     if [ "$(directory_check $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp)" ]; then
@@ -67,10 +68,6 @@ run() {
         _jq() {
             # Build hook. The $PLATFORM_BRANCH environment variable is not available in build containers.
             if [ -z "${PLATFORM_BRANCH}" ]; then
-                # Create the tmp directory (MOUNT_TMP) on the first pass only. (/app/platformsh-mounts on Platform.sh)
-                # if [ -d $PLATFORM_APP_DIR/$MOUNT_TMP ]; then
-                #     mkdir $PLATFORM_APP_DIR/$MOUNT_TMP
-                # fi 
                 stage_files $mount
             # Deploy hook.
             else
