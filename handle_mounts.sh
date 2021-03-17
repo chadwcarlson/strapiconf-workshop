@@ -48,7 +48,6 @@ stage_files() {
 #   away from the tmp directory MOUNT_TMP back into their original location, which is now a mount with write-access at 
 #   deploy time.
 restore_files() {
-    echo "-----> $1"
     MOUNT="clean_mount_defn $1"
     # if [ -d $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp ]; then 
     if [ "$(directory_check $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp)" ]; then
