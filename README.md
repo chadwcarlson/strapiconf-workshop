@@ -2,6 +2,8 @@
 
 A quick description of your strapi application
 
+- People can create an administrator before hand, but we'll be re-creating that when we add PostgreSQL. Same with entries and content types/collections
+
 ## 1. [Platformify](https://github.com/chadwcarlson/strapiconf-workshop/pull/1)
 
 - `touch .platform.app.yaml && mkdir -p .platform && touch .platform/routes.yaml && touch .platform/services.yaml`
