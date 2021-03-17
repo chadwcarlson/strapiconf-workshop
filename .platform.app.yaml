@@ -33,7 +33,7 @@ hooks:
     # Code cannot be modified at this point but the database is available.
     # The site is not accepting requests while this script runs so keep it
     # fast.
-    build: !include
+    deploy: !include
         type: string
         path: handle_mounts.sh
 
