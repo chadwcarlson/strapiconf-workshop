@@ -4,10 +4,10 @@ const config = require("platformsh-config").config();
 //    Be sure to update both values during changes.
 let dbRelationship = "postgresdatabase";
 
-// Strapi default sqlite settings.
+// Local: Strapi default sqlite settings.
 let settings =  {
-  client: 'sqlite',
-  filename: process.env.DATABASE_FILENAME || '.tmp/data.db',
+    client: 'sqlite',
+    filename: process.env.DATABASE_FILENAME || '.tmp/data.db',
 };
 
 let options = {

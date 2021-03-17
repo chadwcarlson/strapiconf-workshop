@@ -57,6 +57,8 @@ restore_files() {
         rm -r $PLATFORM_APP_DIR/$MOUNT/*
         # Restore the directory's files.
         cp -r $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp/* $PLATFORM_APP_DIR/$MOUNT
+    else
+        echo "x platform.sh: No staged commits for mount $MOUNT. Skipping."
     fi 
 }
 
