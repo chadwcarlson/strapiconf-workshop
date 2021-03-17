@@ -34,13 +34,13 @@ clean_mount_defn(){
 stage_files() {
     MOUNT="$(clean_mount_defn $1)"
     if [ "$(directory_check $PLATFORM_APP_DIR/$MOUNT)" ]; then
-        echo "> platform.sh: Staging commits to mount: $MOUNT"
+        echo "> platform.sh: Staging committed files in mount $MOUNT"
         # Duplicate the mount directory in MOUNT_TMP. 
         mkdir -p $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp
         # Move its files.
         mv $PLATFORM_APP_DIR/$MOUNT/* $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp
     else
-        echo "x platform.sh: No commits to mount $MOUNT. Skipping."
+        echo "x platform.sh: No committed files in mount $MOUNT. Skipping."
     fi
 }
 
@@ -48,11 +48,18 @@ stage_files() {
 #   away from the tmp directory MOUNT_TMP back into their original location, which is now a mount with write-access at 
 #   deploy time.
 restore_files() {
-    clean_mount_defn $1
+
+    for dir in $PLATFORM_APP_DIR/$MOUNT_TMP     # list directories in the form "/tmp/dirname/"
+    do
+        dir=${dir%*/}      # remove the trailing "/"
+        echo "${dir##*/}"    # print everything after the final "/"
+    done
+
+
     MOUNT="$(clean_mount_defn $1)"
     # if [ -d $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp ]; then 
     if [ "$(directory_check $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp)" ]; then
-        echo "> platform.sh: Restoring commits to mount: $MOUNT"
+        echo "> platform.sh: Restoring committed files to mount $MOUNT"
         # Clean up files in mount so it's up to date with what we're moving over. 
         rm -r $PLATFORM_APP_DIR/$MOUNT/*
         # Restore the directory's files.
