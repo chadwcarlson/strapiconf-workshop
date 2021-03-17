@@ -26,7 +26,6 @@ directory_check(){
 #   See: https://docs.platform.sh/configuration/app/storage.html#why-cant-i-mount-a-hidden-folder
 clean_mount_defn(){
     MOUNT=$1
-    echo "--X--> $1"
     if [ ${MOUNT:0:1} == "/" ]; then echo "${MOUNT:1}"; else echo $MOUNT; fi
 }
 
