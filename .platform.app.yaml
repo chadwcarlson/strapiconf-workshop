@@ -62,12 +62,10 @@ web:
     #             - full_documentation.json
     commands:
         start: |
-            echo $STRAPI_ALLOW_DEV
-            # Production start on `master`, development server otherwise.
-            if [ "$PLATFORM_BRANCH" = master ]; then
-                NODE_ENV=production yarn start
-            else
+            if [ "$PLATFORM_BRANCH" != master ] && [ "$ALLOW_STRAPI_DEV" = true ]; then 
                 yarn develop
+            else 
+                NODE_ENV=production yarn start
             fi
 
 # The size of the persistent disk of the application (in MB).
