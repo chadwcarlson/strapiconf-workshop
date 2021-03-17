@@ -38,6 +38,14 @@ hooks:
         # Move committed files from temp directory back into mounts.
         ./handle_mounts.sh
 
+# The relationships of the application with services or other applications.
+#
+# The left-hand side is the name of the relationship as it will be exposed
+# to the application in the PLATFORM_RELATIONSHIPS variable. The right-hand
+# side is in the form `<service name>:<endpoint name>`.
+relationships:
+    postgresdatabase: "dbpostgres:postgresql"
+
 # The configuration of app when it is exposed to the web.
 web:
     # locations:

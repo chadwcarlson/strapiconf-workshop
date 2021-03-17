@@ -11,3 +11,9 @@ A quick description of your strapi application
 - `curl https://raw.githubusercontent.com/platformsh-templates/eleventy-strapi/master/strapi/.environment >> .environment`
 - Update `.environment` to use `primary` instead (`ENVIRONMENT=$(echo $PLATFORM_ROUTES | base64 --decode | jq -r 'to_entries[] | select(.value.primary == true) | .key')`)
 - modify build and deploy hooks to match `eleventy-strapi`
+
+## 2. [Adding PostgreSQL db](https://github.com/chadwcarlson/strapiconf-workshop/pull/2)
+
+- add postgress to services.yaml
+- add relationship
+- update database.js: This allows us to continue using sqllite locally, but deploy to Postgres
