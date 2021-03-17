@@ -49,7 +49,7 @@ stage_files() {
 #   deploy time.
 restore_files() {
 
-    for dir in $PLATFORM_APP_DIR/$MOUNT_TMP     # list directories in the form "/tmp/dirname/"
+    for dir in $PLATFORM_APP_DIR/$MOUNT_TMP/     # list directories in the form "/tmp/dirname/"
     do
         dir=${dir%*/}      # remove the trailing "/"
         echo "${dir##*/}"    # print everything after the final "/"
