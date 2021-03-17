@@ -34,7 +34,7 @@ clean_mount_defn(){
 stage_files() {
     MOUNT=`clean_mount_defn $1`
     if [ "$(directory_check $PLATFORM_APP_DIR/$MOUNT)" ]; then
-        echo "> Staging commits to mount: $MOUNT"
+        echo "\xE2\x9C\x94 Staging commits to mount: $MOUNT"
         # Duplicate the mount directory in MOUNT_TMP. 
         mkdir -p $PLATFORM_APP_DIR/$MOUNT_TMP/$MOUNT-tmp
         # Move its files.
