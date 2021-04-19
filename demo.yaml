@@ -1,0 +1,56 @@
+name: strapi
+
+type: nodejs:12
+
+dependencies:
+    nodejs:
+        yarn: "1.22.5"
+
+hooks:
+    build: |
+        yarn --ignore-optional --frozen-lockfile 
+        yarn build
+
+relationships:
+    postgresdatabase: "dbpostgres:postgresql"
+
+web:
+    commands:
+        start: NODE_ENV=production yarn start
+
+disk: 1024
+
+
+mounts:
+    '/.cache':
+        source: local
+        source_path: cache
+
+
+    ...
+
+    
+    # Allows write access to the SQLite db
+    '/.tmp':
+        source: local
+        source_path: cache
+    # Allow for updates to the API (new JSONs) at runtime.
+    'api':
+        source: local
+        source_path: api
+    # Allow GraphQL schema updates (JSON) at runtime.
+    'exports':
+        source: local
+        source_path: exports
+    # Give write access for extension configuration JSONs.
+    'extensions':
+        source: local
+        source_path: extensions
+    # Allow for custom components at runtime.
+    'components':
+        source: local
+        source_path: components
+    # Allow for media uploads at runtime.
+    'public':
+        source: local
+        source_path: public

@@ -20,3 +20,22 @@ A quick description of your strapi application
 - add config-reader: `yarn add platformsh-config`
 - GO BACK: ERRORS ON HANDLE_MOUNTS.SH (need some ignore steps added in here for those gitignored)
 - add postgress connector: `yarn add pg`
+
+
+
+Before workshop:
+
+0. Deploy Strapi under free trial
+    - sqllite
+    - articles collection, but no data
+    - it is a production strapi server, so only new pieces of content can be added at runtime, as well as server settings.
+    - config reader installed
+    - pg installed
+    - 
+    - Clone locally (although revisit how to do so again at the beginning)
+1. Quick tour of Platform.sh configuration for Strapi
+2. Switch SQLite for PostgreSQL 
+3. Add documentation module/generate OpenAPI spec.
+4. Change production permissions. import to PostMan.
+5. Vault
+6. Redis

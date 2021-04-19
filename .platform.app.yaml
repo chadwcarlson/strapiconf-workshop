@@ -52,14 +52,14 @@ relationships:
 
 # The configuration of app when it is exposed to the web.
 web:
-    # locations:
-    #     # For serving the generated OpenAPI specification as part of the documentation.
-    #     "/docs/spec":
-    #         root: "extensions/documentation/documentation/1.0.0"
-    #         allow: true
-    #         scripts: false
-    #         index:
-    #             - full_documentation.json
+    locations:
+        # For serving the generated OpenAPI specification as part of the documentation.
+        "/docs/spec":
+            root: "extensions/documentation/documentation/1.0.0"
+            allow: true
+            scripts: false
+            index:
+                - full_documentation.json
     commands:
         start: |
             if [ "$PLATFORM_BRANCH" != master ] && [ "$ALLOW_STRAPI_DEV" = true ]; then 
